@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Un lirio para Emily</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap">
+<style>
+:root{
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+  --bg:#eaf1fb; --ink:#1d3a73; --stem:#3f7a63; --leaf:#bfe3d0;
+  --p-back:#9db8f2; --p-front:#6f94e8; --vein:#2f56b8; --stamen:#e8b84a; --btn:#1d3a73; --btn-t:#eaf1fb;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0b1430; --ink:#cfdcff; --stem:#6fb594; --leaf:#1f4a3b;
+    --p-back:#4a6fd0; --p-front:#7ea2ff; --vein:#cfdcff; --stamen:#f2c35b; --btn:#cfdcff; --btn-t:#0b1430;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0b1430; --ink:#cfdcff; --stem:#6fb594; --leaf:#1f4a3b;
+  --p-back:#4a6fd0; --p-front:#7ea2ff; --vein:#cfdcff; --stamen:#f2c35b; --btn:#cfdcff; --btn-t:#0b1430;
+}
+html,body{height:100%;margin:0}
+body{background:var(--bg);color:var(--ink);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-family:'Great Vibes',cursive,serif}
+svg{width:min(78vw,340px);height:auto;max-height:62vh;overflow:visible}
+.d{fill:none;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1;stroke-dashoffset:1}
+.stem{stroke:var(--stem);stroke-width:4}
+.leaf{stroke:var(--stem);--f:var(--leaf)}
+.back{stroke:var(--vein);--f:var(--p-back)}
+.front{stroke:var(--vein);--f:var(--p-front)}
+.vein{stroke:var(--vein);stroke-width:1.4;opacity:.7}
+.st{stroke:var(--stamen);stroke-width:2}
+.an{fill:var(--stamen);opacity:0}
+.go .d{animation:draw var(--t,2s) ease-in-out var(--s,0s) forwards, fillin 1.4s ease var(--fs,0s) forwards}
+.go .vein,.go .st,.go .stem{animation:draw var(--t,2s) ease-in-out var(--s,0s) forwards}
+.go .an{animation:pop .6s ease var(--s,0s) forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes fillin{to{fill:var(--f)}}
+@keyframes pop{to{opacity:1}}
+.msg{font-size:clamp(2.6rem,12vw,4rem);line-height:1.2;text-align:center;min-height:1.3em;margin:0;padding:0 16px}
+.msg span{opacity:0;display:inline-block;transition:opacity .9s ease}
+.msg span.on{opacity:1}
+button{margin-top:18px;font:inherit;font-family:system-ui,sans-serif;font-size:.85rem;background:none;color:var(--btn);border:1px solid var(--btn);border-radius:999px;padding:8px 18px;cursor:pointer;opacity:.75}
+button:focus-visible{outline:3px solid var(--vein);outline-offset:3px}
+.sign{font-size:clamp(1.6rem,7vw,2.2rem);margin:6px 0 0;text-align:center;opacity:0;transform:translateY(6px);transition:opacity 1.4s ease,transform 1.4s ease}
+.sign.on{opacity:.9;transform:none}
+@media (prefers-reduced-motion: reduce){.sign{transition:none}}
+.glow{position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(circle at 50% 40%,color-mix(in srgb,var(--p-front) 38%,transparent),transparent 62%);animation:breathe 7s ease-in-out infinite}
+#bg{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+@keyframes breathe{0%,100%{opacity:.55;transform:scale(1)}50%{opacity:1;transform:scale(1.12)}}
+@media (prefers-reduced-motion: reduce){
+  .glow{animation:none}
+  .d,.go .d{animation:none!important;stroke-dashoffset:0;fill:var(--f,none)}
+  .an{animation:none!important;opacity:1}
+  .msg span{transition:none;opacity:1}
+}
+</style>
+</head>
+<body>
+<div class="glow" aria-hidden="true"></div>
+<canvas id="bg" aria-hidden="true"></canvas>
+<svg id="lirio" viewBox="0 0 400 520" role="img" aria-label="Un lirio azul dibujándose">
+  <path class="d stem" pathLength="1" style="--t:2.2s;--s:0s" d="M200 252 C208 330 190 410 200 505"/>
+  <path class="d leaf" pathLength="1" style="--t:1.6s;--s:2s;--fs:3s" d="M198 430 C150 410 108 372 98 322 C145 332 188 374 198 430Z"/>
+  <path class="d leaf" pathLength="1" style="--t:1.6s;--s:2.4s;--fs:3.4s" d="M202 390 C250 372 292 336 302 288 C255 298 212 338 202 390Z"/>
+
+  <g transform="rotate(-68 200 252)"><path class="d back" pathLength="1" style="--t:1.8s;--s:3.6s;--fs:4.8s" d="M200 252 C163 200 168 120 200 62 C232 120 237 200 200 252Z"/></g>
+  <g transform="rotate(68 200 252)"><path class="d back" pathLength="1" style="--t:1.8s;--s:4.6s;--fs:5.8s" d="M200 252 C163 200 168 120 200 62 C232 120 237 200 200 252Z"/></g>
+  <g><path class="d back" pathLength="1" style="--t:1.8s;--s:5.6s;--fs:6.8s" d="M200 252 C163 200 168 120 200 62 C232 120 237 200 200 252Z"/>
+     <path class="d vein" pathLength="1" style="--t:1.4s;--s:6.4s" d="M200 248 C200 190 200 120 200 84"/></g>
+
+  <g transform="rotate(-106 200 252)"><path class="d back" pathLength="1" style="--t:1.8s;--s:4.1s;--fs:5.3s" d="M200 252 C165 205 170 130 200 78 C230 130 235 205 200 252Z"/></g>
+  <g transform="rotate(106 200 252)"><path class="d back" pathLength="1" style="--t:1.8s;--s:5.1s;--fs:6.3s" d="M200 252 C165 205 170 130 200 78 C230 130 235 205 200 252Z"/></g>
+
+  <g transform="rotate(-34 200 252)"><path class="d front" pathLength="1" style="--t:1.8s;--s:6.8s;--fs:8s" d="M200 252 C166 205 172 135 200 88 C228 135 234 205 200 252Z"/>
+     <path class="d vein" pathLength="1" style="--t:1.4s;--s:7.6s" d="M200 246 C200 200 200 140 200 108"/></g>
+  <g transform="rotate(34 200 252)"><path class="d front" pathLength="1" style="--t:1.8s;--s:7.8s;--fs:9s" d="M200 252 C166 205 172 135 200 88 C228 135 234 205 200 252Z"/>
+     <path class="d vein" pathLength="1" style="--t:1.4s;--s:8.6s" d="M200 246 C200 200 200 140 200 108"/></g>
+
+  <g transform="rotate(-54 200 252)"><path class="d front" pathLength="1" style="--t:1.6s;--s:8.2s;--fs:9.2s" d="M200 252 C168 210 174 150 200 100 C226 150 232 210 200 252Z"/>
+     <path class="d vein" pathLength="1" style="--t:1.2s;--s:8.9s" d="M200 246 C200 200 200 150 200 120"/></g>
+  <g transform="rotate(54 200 252)"><path class="d front" pathLength="1" style="--t:1.6s;--s:8.4s;--fs:9.4s" d="M200 252 C168 210 174 150 200 100 C226 150 232 210 200 252Z"/>
+     <path class="d vein" pathLength="1" style="--t:1.2s;--s:9.1s" d="M200 246 C200 200 200 150 200 120"/></g>
+  <g><path class="d front" pathLength="1" style="--t:1.6s;--s:8.6s;--fs:9.6s" d="M200 252 C172 215 176 162 200 120 C224 162 228 215 200 252Z"/></g>
+
+  <path class="d st" pathLength="1" style="--t:1s;--s:9.4s" d="M200 250 C190 220 180 190 172 168"/>
+  <path class="d st" pathLength="1" style="--t:1s;--s:9.6s" d="M200 250 C196 215 192 185 190 150"/>
+  <path class="d st" pathLength="1" style="--t:1s;--s:9.8s" d="M200 250 C204 215 208 185 210 150"/>
+  <path class="d st" pathLength="1" style="--t:1s;--s:10s" d="M200 250 C210 220 220 190 228 168"/>
+  <ellipse class="an" style="--s:10.3s" cx="171" cy="164" rx="4" ry="8" transform="rotate(-24 171 164)"/>
+  <ellipse class="an" style="--s:10.4s" cx="190" cy="146" rx="4" ry="8"/>
+  <ellipse class="an" style="--s:10.5s" cx="210" cy="146" rx="4" ry="8"/>
+  <ellipse class="an" style="--s:10.6s" cx="229" cy="164" rx="4" ry="8" transform="rotate(24 229 164)"/>
+</svg>
+<p class="msg" id="msg" aria-label="Te amo Emily"></p>
+<p class="sign" id="sign">con cariño, Andre</p>
+<button id="again" type="button">Volver a dibujar</button>
+
+<script>
+(function(){
+  var svg=document.getElementById('lirio'), msg=document.getElementById('msg'), text='Te amo Emily', timers=[];
+  function run(){
+    timers.forEach(clearTimeout); timers=[];
+    msg.innerHTML='';
+    var sign=document.getElementById('sign');sign.classList.remove('on');
+    svg.classList.remove('go'); void svg.getBoundingClientRect(); svg.classList.add('go');
+    var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    text.split('').forEach(function(ch,i){
+      var s=document.createElement('span'); s.setAttribute('aria-hidden','true');
+      s.textContent=ch===' '?'\u00a0':ch; msg.appendChild(s);
+      timers.push(setTimeout(function(){s.classList.add('on')}, reduce?0:11200+i*170));
+    });
+    timers.push(setTimeout(function(){sign.classList.add('on')}, reduce?0:13800));
+  }
+  document.getElementById('again').addEventListener('click',run);
+  run();
+})();
+
+(function(){
+  var c=document.getElementById('bg'),x=c.getContext('2d'),W,H,dpr,ps=[];
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function col(n){return getComputedStyle(document.documentElement).getPropertyValue(n).trim()}
+  function size(){dpr=Math.min(window.devicePixelRatio||1,2);W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0)}
+  function mk(start){
+    var petal=Math.random()<.45;
+    return{petal:petal,x:Math.random()*W,y:start?Math.random()*H:(petal?-20:H+20),
+      r:petal?5+Math.random()*5:1+Math.random()*2.2,
+      vy:petal?.3+Math.random()*.5:-(.15+Math.random()*.35),
+      vx:(Math.random()-.5)*.3,a:Math.random()*6.28,va:(Math.random()-.5)*.02,ph:Math.random()*6.28};
+  }
+  function init(){size();var n=Math.round(Math.min(70,W*H/14000));ps=[];for(var i=0;i<n;i++)ps.push(mk(true))}
+  function frame(t){
+    x.clearRect(0,0,W,H);
+    var b=col('--p-front'),s=col('--stamen');
+    ps.forEach(function(p){
+      p.x+=p.vx+Math.sin(t/1500+p.ph)*.25;p.y+=p.vy;p.a+=p.va;
+      if((p.petal&&p.y>H+20)||(!p.petal&&p.y<-20))Object.assign(p,mk(false));
+      x.save();x.translate(p.x,p.y);
+      if(p.petal){x.rotate(p.a);x.globalAlpha=.55;x.fillStyle=b;x.beginPath();x.ellipse(0,0,p.r,p.r*.45,0,0,6.28);x.fill()}
+      else{x.globalAlpha=.35+.65*Math.abs(Math.sin(t/900+p.ph));x.shadowColor=s;x.shadowBlur=12;x.fillStyle=s;x.beginPath();x.arc(0,0,p.r,0,6.28);x.fill()}
+      x.restore();
+    });
+    if(!reduce)requestAnimationFrame(frame);
+  }
+  window.addEventListener('resize',init);
+  init();requestAnimationFrame(frame);
+})();
+</script>
+</body>
+</html>
